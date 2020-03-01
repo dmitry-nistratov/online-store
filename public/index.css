@@ -1,0 +1,33 @@
+.nav-wrapper {
+  padding: 0 2rem;
+}
+
+.price {
+  font-size: 2rem;
+}
+
+.device {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.device h1 {
+  margin-bottom: 2rem;
+}
+
+.device img {
+  max-width: 600px;
+  height: auto;
+}
+
+.device .device.big {
+  font-size: 2.5rem;
+}
+
+.card-action.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

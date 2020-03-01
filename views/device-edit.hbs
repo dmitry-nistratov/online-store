@@ -1,0 +1,23 @@
+<h1>Edit device {{device.title}}</h1>
+
+<form action="/devices/edit" method="POST">
+  <div class="input-field">
+    <input id="title" name="title" type="text" class="validate" required value="{{device.title}}">
+    <label for="title">Device name</label>
+    <span class="helper-text" data-error="Enter device name"></span>
+  </div>
+  <div class="input-field">
+    <input id="price" name="price" type="text" class="validate" required min="1" value="{{device.price}}">
+    <label for="price">Device price</label>
+    <span class="helper-text" data-error="Enter device price"></span>
+  </div>
+  <div class="input-field">
+    <input id="image" name="image" type="text" class="validate" required value="{{device.image}}">
+    <label for="image">image URL</label>
+    <span class="helper-text" data-error="Enter image URL"></span>
+  </div>
+
+  <input type="hidden" name="id" value="{{device.id}}">
+
+  <button class="btn btn-primary">Edit device</button>
+</form>
