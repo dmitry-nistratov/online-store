@@ -1,3 +1,9 @@
 <h1>Welcome!</h1>
 
 <p>The best Apple devices in our store at good prices</p>
+
+{{#if sales.length}}
+{{#each sales}}
+<div><img width="650" src="{{poster}}"></div>
+{{/each}}
+{{/if}}

@@ -17,6 +17,11 @@
       {{else}}
       <li><a href="/add">Add device</a></li>
       {{/if}}
+      {{#if isContacts}}
+      <li class="active"><a href="/contacts">Contacts</a></li>
+      {{else}}
+      <li><a href="/contacts">Contacts</a></li>
+      {{/if}}
       {{#if isCard}}
       <li class="active"><a href="/card">Basket</a></li>
       {{else}}

@@ -1,7 +1,76 @@
-class Card {
-  add() {}
+const path = require("path");
+const fs = require("fs");
 
-  fetch() {}
+const p = path.join(
+  path.dirname(process.mainModule.filename),
+  "data",
+  "card.json"
+);
+
+class Card {
+  static async add(device) {
+    const card = await Card.fetch();
+
+    const idx = card.devices.findIndex(item => item.id === device.id);
+    const candidate = card.devices[idx];
+
+    if (candidate) {
+      candidate.count++;
+      card.devices[idx] = candidate;
+    } else {
+      device.count = 1;
+      card.devices.push(device);
+    }
+
+    card.price += +device.price;
+
+    return new Promise((resolve, reject) => {
+      fs.writeFile(p, JSON.stringify(card), err => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
+  }
+
+  static async remove(id) {
+    const card = await Card.fetch();
+
+    const idx = card.devices.findIndex(item => item.id === id);
+    const device = card.devices[idx];
+
+    if (device.count === 1) {
+      card.devices = card.devices.filter(item => item.id !== id);
+    } else {
+      card.devices[idx].count--;
+    }
+
+    card.price -= device.price;
+
+    return new Promise((resolve, reject) => {
+      fs.writeFile(p, JSON.stringify(card), err => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(card); // передаём *
+        }
+      });
+    });
+  }
+
+  static async fetch() {
+    return new Promise((resolve, reject) => {
+      fs.readFile(p, "utf-8", (err, content) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(JSON.parse(content));
+        }
+      });
+    });
+  }
 }
 
 module.exports = Card;
